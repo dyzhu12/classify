@@ -1,0 +1,36 @@
+{
+	"env": {
+		"browser": true,
+		"node": true
+	},
+
+	"plugins": [
+		"react"
+	],
+
+	"ecmaFeatures": {
+		"jsx": true
+	},
+
+	"rules": {
+		"brace-style": 2,
+		"indent": [2, "tab"],
+		"max-len": [2, 120, 4],
+		"new-cap": 0, // https://github.com/eslint/eslint/issues/2023
+		"no-use-before-define": [2, "nofunc"],
+		"one-var": [2, "never"],
+		"operator-linebreak": 2,
+		"quote-props": [2, "as-needed"],
+		"quotes": [2, "single", "avoid-escape"],
+		"space-after-keywords": 2,
+		"space-before-function-paren": [2, "never"],
+
+		// REACT/JSX-SPECIFIC RULES
+		"react/jsx-no-undef": 2,
+		"react/jsx-uses-react": 2,
+		"react/jsx-uses-vars": 2,
+		"react/no-unknown-property": 2,
+		"react/self-closing-comp": 2,
+		"react/wrap-multilines": 2,
+	}
+}
