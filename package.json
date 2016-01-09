@@ -22,12 +22,10 @@
     "serve-favicon": "~2.3.0",
     "gulp": "^3.9.0",
     "browserify": "^11.2.0",
-    "vinyl-source-stream": "^1.1.0"
-  },
-  "devDependencies": {
+    "reactify": "^1.1.1",
     "eslint": "^1.5.1",
     "eslint-plugin-react": "^3.5.1",
     "gulp-eslint": "^1.0.0",
-    "reactify": "^1.1.1"
+    "vinyl-source-stream": "^1.1.0"
   }
 }

@@ -33,7 +33,7 @@ module.exports = React.createClass({
 					<div className='header'>
 						<div className='title-container'>
 							<h1 className='title'>Classify</h1>
-							<p>Find your class</p>
+							<p>Find UMD classes</p>
 						</div>
 					</div>
 					<input autoFocus type='text' name='search' placeholder='Search by keyword...'/>
