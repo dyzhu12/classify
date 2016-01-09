@@ -26,7 +26,7 @@ function getList(keywords) {
 				var name = course.name.toLowerCase();
 				var department = course.department.toLowerCase();
 				var keyword = keyword.toLowerCase();
-				if (name.indexOf(keyword) > -1 || department.indexOf(keyword) > -1) {
+				if (keyword.length > 1 && (name.indexOf(keyword) > -1 || department.indexOf(keyword) > -1)) {
 					filteredList.push({
 						id: course.course_id,
 						name: course.name
