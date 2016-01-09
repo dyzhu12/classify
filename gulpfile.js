@@ -6,6 +6,7 @@ var reactify = require('reactify');
 var source = require('vinyl-source-stream');
 var eslint = require('gulp-eslint');
 var uglify = require('gulp-uglify');
+var shell = require('gulp-shell');
 
 gulp.task('lint', function() {
 	return gulp.src(['bin/**/*', 'public/javascripts/src/**/*', '*.js'])
@@ -33,6 +34,14 @@ gulp.task('sass', function() {
 		.pipe(gulp.dest('public/stylesheets/css'));
 });
 
+gulp.task('purify', ['js', 'sass'], shell.task(
+	'purifycss ' +
+	'public/stylesheets/css/base.css ' +
+	'public/javascripts/build/app.js views/*.jade ' +
+	'--min --info --out public/stylesheets/css/base.css')
+);
+
+
 gulp.task('watch', function() {
 	gulp.watch('public/javascripts/src/**/*.js*', ['js', 'lint']);
 	gulp.watch('public/stylesheets/sass/**/*.scss', ['sass']);
@@ -43,4 +52,4 @@ gulp.task('watch', function() {
 });
 
 gulp.task('default', ['js', 'sass', 'lint', 'watch']);
-gulp.task('prod', ['js', 'sass', 'js-min']);
+gulp.task('prod', ['js', 'sass', 'js-min', 'purify']);
