@@ -36,3 +36,4 @@ gulp.task('watch', function() {
 });
 
 gulp.task('default', ['js', 'sass', 'lint', 'watch']);
+gulp.task('prod', ['js', 'sass']);

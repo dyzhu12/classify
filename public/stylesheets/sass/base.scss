@@ -3,7 +3,6 @@ html, body {
 	height: 100%;
 	padding: 0;
 	margin: 0;
-	// background-color: #d6192f;
 	background-color: white;
 }
 
@@ -14,6 +13,11 @@ h1 {
 ul {
 	margin: 0;
 	padding: 0;
+	font-family: 'Source Sans Pro', sans-serif;
+	list-style: none;
+	li {
+		padding-bottom: 5px;
+	}
 }
 p {
 	margin: 0;
@@ -22,6 +26,7 @@ p {
 form {
 	padding: 2%;
 	padding-bottom: 20px;
+	// background-color: #d6192f;
 }
 input {
 	border: 0;
@@ -35,16 +40,21 @@ input {
 	line-height: 1.4em;
 	font-family: 'Source Sans Pro', sans-serif;
 }
-input:placeholder-shown {
+input:placeholder-shown, input::-webkit-input-placeholder, input::-moz-input-placeholder {
 	color: #494949;
 }
-input::-webkit-input-placeholder {
-	color: #494949;
-}
-
 
 input:focus {
 	outline: none;
+}
+
+a, a:hover, a:visited, a:focus {
+	text-decoration: none;
+	color: #494949
+}
+
+a:hover {
+	color: #d6192f;
 }
 
 .container {
@@ -52,23 +62,25 @@ input:focus {
 	width: 95%;
 }
 
+.class-entry {
+
+}
+
 .title-container {
 	display: inline-block;
-}
-
-.title-container > p {
-	padding-left: 10px;
-	display: inline-block;
-	color: #494949;
-	font-family: 'Source Sans Pro', sans-serif;
-}
-
-.title {
-	padding-bottom: 10px;
-	display: inline-block;
-	font-family: 'Source Sans Pro', sans-serif;
-	font-weight: 700;
-	color: #494949;
+	p {
+		padding-left: 10px;
+		display: inline-block;
+		color: #494949;
+		font-family: 'Source Sans Pro', sans-serif;
+	}
+	.title {
+		padding-bottom: 10px;
+		display: inline-block;
+		font-family: 'Source Sans Pro', sans-serif;
+		font-weight: 700;
+		color: #494949;
+	}
 }
 
 .attribution {
@@ -76,18 +88,18 @@ input:focus {
 	bottom: 2%;
 	right: 2%;
 	display: inline-block;
-}
 
-.attribution > p {
-	padding-bottom: 5px;
-	font-family: 'Source Sans Pro', sans-serif;
-}
+	p {
+		padding-bottom: 5px;
+		font-family: 'Source Sans Pro', sans-serif;
+	}
 
-.attribution-logo {
-	background-image: url('../../images/attribution.png');
-	background-size: contain;
-	background-color: #d6192f;
+	.attribution-logo {
+		background-image: url('../../images/attribution.png');
+		background-size: contain;
+		background-color: #d6192f;
 
-	width: 104px;
-	height: 42px;
+		width: 104px;
+		height: 42px;
+	}
 }
