@@ -1,5 +1,6 @@
 'use strict';
 var gulp = require('gulp');
+var sass = require('gulp-sass');
 var browserify = require('browserify');
 var reactify = require('reactify');
 var source = require('vinyl-source-stream');
@@ -19,10 +20,19 @@ gulp.task('js', function() {
 			.pipe(gulp.dest('public/javascripts/build/'));
 });
 
+gulp.task('sass', function() {
+	return gulp.src('public/stylesheets/sass/*.scss')
+		.pipe(sass())
+		.pipe(gulp.dest('public/stylesheets/css'));
+});
+
 gulp.task('watch', function() {
 	gulp.watch('public/javascripts/src/**/*.js*', ['js', 'lint']);
+	gulp.watch('public/stylesheets/sass/**/*.scss', ['sass']);
 	gulp.watch('*.js', ['lint']);
+	gulp.watch('internal/**/*.js', ['lint']);
+	gulp.watch('routes/**/*.js', ['lint']);
 	gulp.watch('bin/**/*', ['lint']);
 });
 
-gulp.task('default', ['js', 'lint', 'watch']);
+gulp.task('default', ['js', 'sass', 'lint', 'watch']);

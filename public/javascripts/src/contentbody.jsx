@@ -1,52 +1,44 @@
 'use strict';
 var React = require('react');
 var _ = require('lodash');
-var $ = require('jquery');
-
 var Courses = require('./courses.jsx');
-
+var bridge = require('./comm/bridge');
 
 module.exports = React.createClass({
 	getInitialState: function() {
 		return {
 			courses: [],
-			keywords: []
+			filteredList: []
 		};
 	},
 	searchForClasses: function(e) {
 		e.preventDefault();
 		var search = e.target.search.value;
-		console.log('Search type', search)
+		var keywords = search.split(' ').filter(Boolean);
+		var self = this;
 
-		// Delimit by spaces and commas
-		var delimitSpaces = search.split(' ');
-
-		var searchTerms = delimitSpaces;
-		console.log('Search terms', searchTerms);
-		this.setState({keywords: searchTerms.filter(Boolean)});
-
-	},
-	showError: function() {
-		console.log('Sorry!');
-	},
-	updateCourses: function(courses) {
-		this.setState({courses: courses});
+		bridge.execute('GET', '/data/list', {keywords: keywords}, function(filteredList) {
+			self.setState({
+				filteredList: filteredList
+			});
+		});
 	},
 	componentDidMount: function() {
-		$.ajax({
-			url:'http://api.umd.io/v0/courses/list',
-			method: 'GET',
-			success: this.updateCourses,
-			failure: this.showError
-		})
+		bridge.execute('POST', '/data/initialize', null, null, null);
 	},
 	render: function() {
 		return (
 			<div>
 				<form onSubmit={this.searchForClasses}>
-					<input type='text' name='search' placeholder='Search by keyword...'/>
+					<div className='header'>
+						<div className='title-container'>
+							<h1 className='title'>Classify</h1>
+							<p></p>
+						</div>
+					</div>
+					<input autoFocus type='text' name='search' placeholder='Search by keyword...'/>
 				</form>
-				<Courses courseList={this.state.courses} keywords={this.state.keywords}/>
+				<Courses filteredList={this.state.filteredList}/>
 			</div>
 		);
 	}
