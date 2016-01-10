@@ -35,6 +35,7 @@ module.exports = React.createClass({
 							<p>Find UMD classes</p>
 						</div>
 					</div>
+					<i className='icon fa fa-search'></i>
 					<input autoFocus type='text' name='search' placeholder='Search by keyword...'/>
 				</form>
 				<Courses filteredList={this.state.filteredList}/>

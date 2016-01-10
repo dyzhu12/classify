@@ -34,7 +34,7 @@ input {
 	border-bottom-width: 2px;
 	background: transparent;
 	color: #ccc;
-	width: 100%;
+	width: 50%;
 	height: 50px;
 	font-size: 140%;
 	line-height: 1.4em;
@@ -84,6 +84,8 @@ a:hover {
 
 .title-container {
 	display: inline-block;
+	float: left;
+	padding-right: 20px;
 	p {
 		padding-left: 10px;
 		display: inline-block;
@@ -122,4 +124,9 @@ a:hover {
 
 .grid-item, .grid-sizer {
 	width: 20%;
+}
+
+.icon {
+	color: #ccc;
+	padding-right: 10px;
 }
