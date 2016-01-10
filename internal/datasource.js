@@ -36,23 +36,33 @@ function initialize() {
 }
 function getList(keywords) {
 	var filteredCoursesAndDepartments = [];
-
 	if (keywords.length > 0) {
 		coursesAndDepartments.forEach(function(courseAndDepartment) {
 			var filteredList = [];
-			courseAndDepartment.course_list.forEach(function(course) {
+			courseAndDepartment.course_list.forEach(function(course, index) {
 
 				var id = course.course_id.toLowerCase();
 				var name = course.name.toLowerCase();
 				var department = course.department.toLowerCase();
 
-				keywords.forEach(function(keyword) {
+				keywords.forEach(function(keyword, index) {
 					var keyword = keyword.toLowerCase();
 					if (keyword.length > 1 && (id.indexOf(keyword) > -1 || name.indexOf(keyword) > -1 || department.indexOf(keyword) > -1)) {
-						filteredList.push({
+						var obj = {
 							id: course.course_id,
 							name: course.name
-						});
+						};
+
+						var found = false;
+						for(var i = 0; i < filteredList.length; i++) {
+							var filter = filteredList[i];
+							if (filter.id === obj.id) {
+								found = true;
+							}
+						}
+						if (!found) {
+							filteredList.push(obj);
+						}
 					}
 				});
 			});

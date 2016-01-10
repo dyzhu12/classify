@@ -18,14 +18,24 @@ module.exports = React.createClass({
 	},
 	render: function() {
 		var self = this;
+		var resultCount = 0;
+		var filteredList = this.props.filteredList;
+		for (var i = 0; i < filteredList.length; i++) {
+			console.log('filterdlistcount', filteredList[i].course_list.length);
+			resultCount += filteredList[i].course_list.length;
+		}
 		return (
-			<div className='container grid'>
+			<div className='container'>
+			<p>Showing {resultCount} results</p>
+			<div className='grid'>
 			<div className='grid-sizer'></div>
 			{
 				this.props.filteredList.map(function(courseAndDepartment) {
 					return (
 						<div className='courses-container grid-item'>
-							<p className='dept-header'>{courseAndDepartment.department_id}</p>
+							<p className='dept-header'>
+								{courseAndDepartment.department_id} ({courseAndDepartment.course_list.length})
+							</p>
 							<ul>
 							{
 								courseAndDepartment.course_list.map(function(course) {
@@ -45,6 +55,7 @@ module.exports = React.createClass({
 					);
 				})
 			}
+			</div>
 			</div>
 		);
 	}
