@@ -31,7 +31,7 @@ module.exports = React.createClass({
 								courseAndDepartment.course_list.map(function(course) {
 									return (
 										<li>
-											<a href={classLink.replace('{{id}}', course.course_id)}
+											<a href={classLink.replace('{{id}}', course.id)}
 												target='_blank'
 												className='class-link'>
 												{course.id}:  <span className='description'>{course.name}</span>

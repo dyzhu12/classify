@@ -1,6 +1,5 @@
 'use strict';
 var React = require('react');
-var _ = require('lodash');
 var Courses = require('./courses.jsx');
 var bridge = require('./comm/bridge');
 
