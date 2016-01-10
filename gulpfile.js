@@ -7,6 +7,8 @@ var source = require('vinyl-source-stream');
 var eslint = require('gulp-eslint');
 var uglify = require('gulp-uglify');
 var shell = require('gulp-shell');
+var imagemin = require('gulp-imagemin');
+var plumber = require('gulp-plumber');
 
 gulp.task('lint', function() {
 	return gulp.src(['bin/**/*', 'public/javascripts/src/**/*', '*.js'])
@@ -41,6 +43,15 @@ gulp.task('purify', ['js', 'sass'], shell.task(
 	'--min --info --out public/stylesheets/css/base.css')
 );
 
+gulp.task('images', function() {
+	gulp.src('public/images/**/*')
+		.pipe(plumber())
+		.pipe(imagemin({
+			progressive: true,
+		}))
+		.pipe(gulp.dest('public/images/'));
+});
+
 
 gulp.task('watch', function() {
 	gulp.watch('public/javascripts/src/**/*.js*', ['js', 'lint']);
@@ -52,4 +63,4 @@ gulp.task('watch', function() {
 });
 
 gulp.task('default', ['js', 'sass', 'lint', 'watch']);
-gulp.task('prod', ['js', 'sass', 'js-min', 'purify']);
+gulp.task('prod', ['js', 'sass', 'js-min', 'images', 'purify']);
