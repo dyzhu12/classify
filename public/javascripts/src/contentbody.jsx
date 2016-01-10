@@ -32,7 +32,7 @@ module.exports = React.createClass({
 				<form onSubmit={this.searchForClasses}>
 					<div className='header'>
 						<div className='title-container'>
-							<h1 className='title'>Classify</h1>
+							<h1 className='title'>Classify.</h1>
 							<p>Find UMD classes</p>
 						</div>
 					</div>
