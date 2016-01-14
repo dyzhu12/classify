@@ -55,17 +55,19 @@ a:hover {
 
 .dept-header {
 	font-weight: 700;
+	font-size: 20px;
 	display: inline-block;
 	border-bottom-style: solid;
 	border-bottom-width: 2px;
 	margin-bottom: 5px;
+	color: #366092;
 }
 
 .class-link {
-	font-style: italic;
+	font-weight: 700;
 
 	.description {
-		font-style: normal;
+		font-weight: 300;
 	}
 }
 
@@ -129,5 +131,9 @@ a:hover {
 .icon {
 	color: #ccc;
 	padding-right: 10px;
+}
+
+#results {
+	padding-bottom: 20px;
 }
 @import './media_layout';

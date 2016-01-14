@@ -4,43 +4,45 @@ var client = new Client();
 
 module.exports = {
 	initialize: initialize,
-	getList: getList
+	getList: getList,
+	getDepartments: getDepartments
 };
 
-var coursesAndDepartments = [];
+var coursesAndDepartments = {};
+var storedDepartments = [];
 
-function initialize() {
+function initialize(cb) {
 	var self = this;
-	if (coursesAndDepartments.length === 0) {
+	if (Object.keys(coursesAndDepartments).length === 0) {
 		// Ugh change this to async after you get a working version up
 		client.get('http://api.umd.io/v0/courses/list', function(data) {
 			client.get('http://api.umd.io/v0/courses/departments', function(departments) {
 				departments.forEach(function(dept) {
+					storedDepartments.push(dept);
 					var specificCourses = [];
 					data.forEach(function(course) {
 						if (course.course_id.indexOf(dept) > -1) {
 							specificCourses.push(course);
 						}
 					});
-					var courseObj = {};
-					courseObj.department_id = dept;
-					courseObj.course_list = specificCourses;
-					coursesAndDepartments.push(courseObj);
+					coursesAndDepartments[dept] = specificCourses;
 				});
-
+				cb();
 			});
 		});
 		
+	} else {
+		cb();
 	}
 
 }
-function getList(keywords) {
-	var filteredCoursesAndDepartments = [];
+function getList(keywords, cb) {
+	var filteredCoursesAndDepartments = {};
+	var count = 0;
 	if (keywords.length > 0) {
-		coursesAndDepartments.forEach(function(courseAndDepartment) {
+		Object.keys(coursesAndDepartments).forEach(function(deptCode) {
 			var filteredList = [];
-			courseAndDepartment.course_list.forEach(function(course, index) {
-
+			coursesAndDepartments[deptCode].forEach(function(course, index) {
 				var id = course.course_id.toLowerCase();
 				var name = course.name.toLowerCase();
 				var department = course.department.toLowerCase();
@@ -66,15 +68,14 @@ function getList(keywords) {
 					}
 				});
 			});
-
 			if (filteredList.length > 0) {
-				var obj = {};
-				obj.department_id = courseAndDepartment.department_id;
-				obj.course_list = filteredList;
-				filteredCoursesAndDepartments.push(obj);
+				filteredCoursesAndDepartments[deptCode] = filteredList;
 			}
 		});
 	}
+	cb(filteredCoursesAndDepartments);
+}
 
-	return filteredCoursesAndDepartments;
+function getDepartments(cb) {
+	cb(storedDepartments);
 }
